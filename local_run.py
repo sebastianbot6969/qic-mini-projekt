@@ -7,7 +7,7 @@ if __name__ == "__main__":
     sampler = StatevectorSampler()
 
     for test in range(num_tests):
-        data, element = setup(random.randint(2, 1000))
+        data, element = setup(10)
         a = grovers_algorithm(data, element, sampler)
         print("Test:", test + 1)
         print("Data:", data)
