@@ -1,5 +1,6 @@
 from qiskit.primitives import StatevectorSampler
 from main import *
+from qiskit_aer import AerSimulator
 
 
 def test_generate_random_str():
@@ -35,7 +36,7 @@ def test_grover_oracle():
 def test_grovers_algorithm():
     data = ['abc', 'def', 'ghi']
     element = 'def'
-    sampler = StatevectorSampler()
+    sampler = AerSimulator()
     result = grovers_algorithm(data, element, sampler)
-    assert result is True
+    assert isinstance(result, QuantumCircuit)
 
