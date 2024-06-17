@@ -1,8 +1,9 @@
 import math
 import random
 import string
-from qiskit import QuantumCircuit
+from qiskit import QuantumCircuit, transpile
 from qiskit.circuit.library import GroverOperator, MCMT, ZGate
+from qiskit.visualization import plot_distribution
 
 
 def generate_random_str(string_length) -> str:
@@ -78,8 +79,6 @@ def grovers_algorithm(data, element, sampler):
     qc.compose(grover_op.power(optimal_num_iterations), inplace=True)
     # Measure all qubits
     qc.measure_all()
+    transpiled = transpile(qc, sampler)
 
-    # Select backend and execute
-    result = sampler.run([qc], shots=1).result()
-    print("Found element:", element)
-    return True
+    return transpiled
