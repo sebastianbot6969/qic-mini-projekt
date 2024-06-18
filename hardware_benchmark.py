@@ -7,11 +7,12 @@ import pandas as pd
 
 
 if __name__ == "__main__":
+
         with open('resource.json') as resource_file:
-        resource = json.load(resource_file)
+                resource = json.load(resource_file)
         workspace = Workspace(
-        resource_id=resource['id'],
-        location=resource['location']
+                resource_id=resource['id'],
+                location=resource['location']
         )
         provider = AzureQuantumProvider(workspace)
         backend = provider.get_backend("rigetti.sim.qvm")
@@ -20,7 +21,7 @@ if __name__ == "__main__":
         data, element = setup(10)
         a = grovers_algorithm(data, element, backend)
 
-        result = sampler.run(a, shots=10000).result()
+        result = backend.run(a, shots=10000).result()
 
         counts = result.get_counts(a)
         plot_distribution(counts).show()
